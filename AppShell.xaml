@@ -7,7 +7,7 @@
     Title="shephjl_WellnessApp">
 
     <ShellContent
-        Title="Home"
+        Title="Wellness App"
         ContentTemplate="{DataTemplate local:MainPage}"
         Route="MainPage" />
 
