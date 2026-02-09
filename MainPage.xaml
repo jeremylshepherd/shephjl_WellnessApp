@@ -1,14 +1,299 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="shephjl_WellnessApp.MainPage">
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="shephjl_WellnessApp.MainPage"
+    Title="Daily Wellness Score">
 
     <ScrollView>
-        <VerticalStackLayout
-            Padding="30,0"
-            Spacing="25">
-            <Label Text="{Binding Title}" />
-        </VerticalStackLayout>
+        <Grid Padding="20" RowSpacing="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Label
+                Grid.Row="0"
+                Text="Daily Wellness Score"
+                FontSize="28"
+                FontAttributes="Bold"
+                HorizontalOptions="Center"
+                Margin="0,10,0,20" />
+            
+            <Grid Grid.Row="1" RowSpacing="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Label
+                    Grid.Row="0"
+                    Text="Select Gender"
+                    FontSize="18"
+                    FontAttributes="Bold" />
+
+                <Grid
+                    Grid.Row="1"
+                    ColumnSpacing="20"
+                    HorizontalOptions="Center">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <Border
+                        Grid.Column="0"
+                        Stroke="{Binding IsMaleSelected,
+                                  Converter={StaticResource
+                                    BoolToColorConverter}}"
+                        StrokeThickness="3"
+                        BackgroundColor="Transparent"
+                        WidthRequest="145"
+                        HeightRequest="145"
+                        Padding="10">
+                        <Border.StrokeShape>
+                            <Ellipse />
+                        </Border.StrokeShape>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnMaleTapped" />
+                        </Border.GestureRecognizers>
+
+                        <Grid RowSpacing="5">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="80" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <Image
+                                Grid.Row="0"
+                                Source="male.png"
+                                WidthRequest="80"
+                                HeightRequest="80"
+                                Aspect="AspectFit" />
+                            <Label
+                                Grid.Row="1"
+                                Text="Male"
+                                HorizontalOptions="Center"
+                                FontSize="14" />
+                        </Grid>
+                    </Border>
+
+                    <Border
+                        Grid.Column="1"
+                        Stroke="{Binding IsFemaleSelected,
+                                  Converter={StaticResource
+                                    BoolToColorConverter}}"
+                        StrokeThickness="3"
+                        BackgroundColor="Transparent"
+                        WidthRequest="145"
+                        HeightRequest="145"
+                        Padding="10">
+                        <Border.StrokeShape>
+                            <Ellipse />
+                        </Border.StrokeShape>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnFemaleTapped" />
+                        </Border.GestureRecognizers>
+
+                        <Grid RowSpacing="5">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="80" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <Image
+                                Grid.Row="0"
+                                Source="female.png"
+                                WidthRequest="80"
+                                HeightRequest="80"
+                                Aspect="AspectFit" />
+                            <Label
+                                Grid.Row="1"
+                                Text="Female"
+                                HorizontalOptions="Center"
+                                FontSize="14" />
+                        </Grid>
+                    </Border>
+
+                </Grid>
+            </Grid>
+            
+            <Grid Grid.Row="2" RowSpacing="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <Label
+                        Grid.Column="0"
+                        Text="Sleep Hours (last night)"
+                        FontSize="16"
+                        VerticalOptions="Center" />
+                    <Label
+                        Grid.Column="1"
+                        Text="{Binding SleepHoursDisplay}"
+                        FontSize="16"
+                        FontAttributes="Bold"
+                        VerticalOptions="Center" />
+                </Grid>
+
+                <Slider
+                    Grid.Row="1"
+                    Minimum="0"
+                    Maximum="12"
+                    Value="{Binding SleepHours, Mode=TwoWay}"
+                    MinimumTrackColor="#2196F3"
+                    MaximumTrackColor="#E0E0E0" />
+            </Grid>
+            
+            <Grid Grid.Row="3" RowSpacing="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <Label
+                        Grid.Column="0"
+                        Text="Stress Level (0 = calm, 10 = stressed)"
+                        FontSize="16"
+                        VerticalOptions="Center" />
+                    <Label
+                        Grid.Column="1"
+                        Text="{Binding StressLevelDisplay}"
+                        FontSize="16"
+                        FontAttributes="Bold"
+                        VerticalOptions="Center" />
+                </Grid>
+
+                <Slider
+                    Grid.Row="1"
+                    Minimum="0"
+                    Maximum="10"
+                    Value="{Binding StressLevel, Mode=TwoWay}"
+                    MinimumTrackColor="#FF9800"
+                    MaximumTrackColor="#E0E0E0" />
+            </Grid>
+            
+            <Grid Grid.Row="4" RowSpacing="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <Label
+                        Grid.Column="0"
+                        Text="Activity Minutes (today)"
+                        FontSize="16"
+                        VerticalOptions="Center" />
+                    <Label
+                        Grid.Column="1"
+                        Text="{Binding ActivityMinutesDisplay}"
+                        FontSize="16"
+                        FontAttributes="Bold"
+                        VerticalOptions="Center" />
+                </Grid>
+
+                <Slider
+                    Grid.Row="1"
+                    Minimum="0"
+                    Maximum="120"
+                    Value="{Binding ActivityMinutes, Mode=TwoWay}"
+                    MinimumTrackColor="#4CAF50"
+                    MaximumTrackColor="#E0E0E0" />
+            </Grid>
+            
+            <Frame
+                Grid.Row="5"
+                BackgroundColor="#F5F5F5"
+                CornerRadius="15"
+                Padding="20"
+                HasShadow="True"
+                Margin="0,20,0,0">
+                <Grid RowSpacing="15">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0" RowSpacing="5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <Label
+                            Grid.Row="0"
+                            Text="Your Wellness Score"
+                            FontSize="18"
+                            HorizontalOptions="Center" />
+                        <Label
+                            Grid.Row="1"
+                            Text="{Binding WellnessScore}"
+                            FontSize="56"
+                            FontAttributes="Bold"
+                            HorizontalOptions="Center"
+                            TextColor="{Binding StatusColor}" />
+                    </Grid>
+
+                    <Frame
+                        Grid.Row="1"
+                        BackgroundColor="{Binding StatusColor}"
+                        CornerRadius="10"
+                        Padding="15,10"
+                        HasShadow="False">
+                        <Label
+                            Text="{Binding StatusDisplay}"
+                            FontSize="22"
+                            FontAttributes="Bold"
+                            TextColor="White"
+                            HorizontalOptions="Center" />
+                    </Frame>
+
+                    <Grid Grid.Row="2" RowSpacing="8">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <Label
+                            Grid.Row="0"
+                            Text="Recommendations"
+                            FontSize="18"
+                            FontAttributes="Bold" />
+                        <Label
+                            Grid.Row="1"
+                            Text="{Binding Recommendation}"
+                            FontSize="14"
+                            LineBreakMode="WordWrap" />
+                    </Grid>
+
+                </Grid>
+            </Frame>
+
+        </Grid>
     </ScrollView>
 
 </ContentPage>
