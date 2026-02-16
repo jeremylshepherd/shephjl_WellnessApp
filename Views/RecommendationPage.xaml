@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="shephjl_WellnessApp.Views.RecommendationPage"
+    Title="Recommendations">
+
+    <Grid Padding="20" RowSpacing="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Frame
+            Grid.Row="0"
+            BackgroundColor="#F5F5F5"
+            CornerRadius="15"
+            Padding="20"
+            HasShadow="True">
+            <Grid RowSpacing="15">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <Label
+                    Grid.Row="0"
+                    Text="Your Recommendations"
+                    FontSize="24"
+                    FontAttributes="Bold"
+                    HorizontalOptions="Center" />
+
+                <Label
+                    Grid.Row="1"
+                    Text="{Binding Recommendation}"
+                    FontSize="16"
+                    LineBreakMode="WordWrap"
+                    VerticalOptions="Start" />
+            </Grid>
+        </Frame>
+
+        <Button
+            Grid.Row="1"
+            Text="Back to Results"
+            FontSize="18"
+            HeightRequest="50"
+            Clicked="OnBackToResultsClicked"
+            BackgroundColor="#FF9800"
+            TextColor="White"
+            CornerRadius="10" />
+
+        <Button
+            Grid.Row="2"
+            Text="Back to Inputs"
+            FontSize="18"
+            HeightRequest="50"
+            Clicked="OnBackToInputsClicked"
+            BackgroundColor="#757575"
+            TextColor="White"
+            CornerRadius="10" />
+    </Grid>
+</ContentPage>

@@ -11,6 +11,8 @@ public partial class App : Application
 
 	protected override Window CreateWindow(IActivationState? activationState)
 	{
-		return new Window(new AppShell());
+		// Create ViewModel manually for the initial page
+		var viewModel = new ViewModels.MainPageViewModel();
+		return new Window(new NavigationPage(new Views.InputPage(viewModel)));
 	}
 }
